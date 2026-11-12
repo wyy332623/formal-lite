@@ -1,0 +1,164 @@
+SBY 23:47:34 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234734-corners-3094ea/src/rtl/mul.v' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234734-corners-3094ea/work/src/rtl/mul.v'.
+SBY 23:47:34 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234734-corners-3094ea/src/formal/harness.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234734-corners-3094ea/work/src/formal/harness.sv'.
+SBY 23:47:34 [work] engine_0: abc pdr
+SBY 23:47:35 [work] base: starting process "cd work/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 23:47:35 [work] base: finished (returncode=0)
+SBY 23:47:35 [work] prep: starting process "cd work/model; yosys -ql design_prep.log design_prep.ys"
+SBY 23:47:35 [work] prep: finished (returncode=0)
+SBY 23:47:35 [work] aig: starting process "cd work/model; yosys -ql design_aiger.log design_aiger.ys"
+SBY 23:47:35 [work] aig: finished (returncode=0)
+SBY 23:47:35 [work] engine_0: starting process "cd work; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
+SBY 23:47:35 [work] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
+SBY 23:47:35 [work] engine_0: Warning: The last output is interpreted as a constraint.
+SBY 23:47:35 [work] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 2659. MonoCNF = no. SkipGen = no. SolveAll = no.
+SBY 23:47:35 [work] engine_0: Proved output 0 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 1 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 2 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 3 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 4 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 5 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 6 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 7 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 8 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 9 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 10 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 11 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 12 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 13 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 14 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 15 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 16 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 17 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 18 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 19 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 20 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 21 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 22 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 23 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 24 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 25 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 26 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 27 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 28 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 29 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 30 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 31 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 32 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 33 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 34 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 35 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 36 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 37 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 38 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 39 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 40 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 41 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 42 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 43 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 44 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 45 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 46 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 47 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 48 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 49 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 50 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 51 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 52 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 53 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 54 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 55 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 56 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 57 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 58 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 59 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 60 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 61 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 62 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 63 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 64 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 65 in frame 0 (trivial).
+SBY 23:47:35 [work] engine_0: Proved output 66 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 67 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 68 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 69 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 70 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 71 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 72 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 73 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 74 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 75 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 76 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 77 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 78 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 79 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 80 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 81 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 82 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 83 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 84 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 85 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 86 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 87 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 88 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 89 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 90 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 91 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 92 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 93 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 94 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 95 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 96 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 97 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 98 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 99 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 100 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 101 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 102 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 103 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 104 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 105 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 106 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 107 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 108 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 109 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 110 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 111 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 112 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 113 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 114 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 115 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 116 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 117 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 118 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 119 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 120 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 121 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 122 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 123 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 124 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 125 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 126 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Proved output 127 in frame 0 (trivial).
+SBY 23:47:36 [work] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 23:47:36 [work] engine_0: 1 : 0 0                                                                 0     0      0.00 sec  T/O =  0  PRV =128
+SBY 23:47:36 [work] engine_0: All outputs solved or timed out in frame 1.
+SBY 23:47:36 [work] engine_0: Block =    0  Oblig =     0  Clause =     0  Call =     0 (sat=-nan%)  Cex =   0  Start =   0
+SBY 23:47:36 [work] engine_0: SAT solving =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: unsat     =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: sat       =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: Generalize  =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: Push clause =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: Ternary sim =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: Containment =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: CNF compute =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: Refinement  =     0.00 sec (  0.00 %)
+SBY 23:47:36 [work] engine_0: TOTAL       =     0.01 sec (100.00 %)
+SBY 23:47:36 [work] engine_0: Property proved.  Time =     0.01 sec
+SBY 23:47:36 [work] engine_0: Counter-example is not available.
+SBY 23:47:36 [work] engine_0: finished (returncode=0)
+SBY 23:47:36 [work] engine_0: Status returned by engine: PASS
+SBY 23:47:36 [work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)
+SBY 23:47:36 [work] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 23:47:36 [work] summary: engine_0 (abc pdr) returned PASS
+SBY 23:47:36 [work] summary: engine_0 did not produce any traces
+SBY 23:47:36 [work] DONE (PASS, rc=0)

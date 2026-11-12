@@ -1,0 +1,16 @@
+[options]
+mode cover
+depth 2
+timeout 60
+cover_assert on
+
+[engines]
+smtbmc z3
+
+[script]
+read_verilog -formal -sv  rtl/mul.v formal/harness.sv
+prep -top mul_formal
+
+[files]
+rtl/mul.v src/rtl/mul.v
+formal/harness.sv src/formal/harness.sv

@@ -1,0 +1,32 @@
+{
+  "case": "mul",
+  "task": "cover",
+  "mode": "cover",
+  "depth": 2,
+  "source_metadata": {
+    "remote": "https://github.com/wyy332623/calab.git",
+    "branch": "main",
+    "commit": "10d248abc6af8811e506909dd61cc3ddc498ccaf",
+    "module": "mul",
+    "source": "myCPU/mul.v",
+    "sha256": "24fd38b9a19e63caa29bcaa6119ab0d934c41e84fa40a3119f77bee8802669db"
+  },
+  "defines": [],
+  "case_config_sha256": "26933efa01e6d358bbde4168900d22277211e1bc1ffbb4c7d2fc4a4561a744f1",
+  "engine": "smtbmc z3",
+  "timeout_seconds": 60,
+  "expected_raw_status": "PASS",
+  "assumptions_file": "assumptions.md",
+  "source_manifest": [
+    {
+      "path": "D:\\PersonalPrograms\\calab\\formal-lite\\sources\\calab-main-10d248a\\myCPU\\mul.v",
+      "staged_as": "rtl/mul.v",
+      "sha256": "24fd38b9a19e63caa29bcaa6119ab0d934c41e84fa40a3119f77bee8802669db"
+    },
+    {
+      "path": "D:\\PersonalPrograms\\calab\\formal-lite\\cases\\mul\\harness.sv",
+      "staged_as": "formal/harness.sv",
+      "sha256": "536422d46970ecadff99fa9e8656ce8700838821901cdda5bccb29401c5abf70"
+    }
+  ]
+}

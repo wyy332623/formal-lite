@@ -1,0 +1,66 @@
+SBY 23:49:20 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/axi/20261112-234921-stability-16a246/src/rtl/axi_bridge.v' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/axi/20261112-234921-stability-16a246/work/src/rtl/axi_bridge.v'.
+SBY 23:49:20 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/axi/20261112-234921-stability-16a246/src/formal/environment.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/axi/20261112-234921-stability-16a246/work/src/formal/environment.sv'.
+SBY 23:49:20 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/axi/20261112-234921-stability-16a246/src/formal/properties.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/axi/20261112-234921-stability-16a246/work/src/formal/properties.sv'.
+SBY 23:49:20 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/axi/20261112-234921-stability-16a246/src/formal/harness.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/axi/20261112-234921-stability-16a246/work/src/formal/harness.sv'.
+SBY 23:49:20 [work] engine_0: abc pdr
+SBY 23:49:20 [work] base: starting process "cd work/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 23:49:20 [work] base: Warning: wire '\rd_busy' is assigned in a block at rtl/axi_bridge.v:183.9-183.24.
+SBY 23:49:20 [work] base: Warning: wire '\rd_busy' is assigned in a block at rtl/axi_bridge.v:187.13-187.28.
+SBY 23:49:20 [work] base: Warning: wire '\rd_busy' is assigned in a block at rtl/axi_bridge.v:190.13-190.28.
+SBY 23:49:20 [work] base: rtl/axi_bridge.v:183: Warning: Identifier `\rd_busy' is implicitly declared.
+SBY 23:49:20 [work] base: Warning: Replacing memory \mem_rd_token with list of registers. See formal/properties.sv:108, formal/properties.sv:93
+SBY 23:49:20 [work] base: Warning: Replacing memory \if_rd_token with list of registers. See formal/properties.sv:103, formal/properties.sv:89
+SBY 23:49:21 [work] base: finished (returncode=0)
+SBY 23:49:21 [work] prep: starting process "cd work/model; yosys -ql design_prep.log design_prep.ys"
+SBY 23:49:21 [work] prep: finished (returncode=0)
+SBY 23:49:21 [work] aig: starting process "cd work/model; yosys -ql design_aiger.log design_aiger.ys"
+SBY 23:49:21 [work] aig: Warning: Treating undriven bit bridge_formal.\aclk like $anyseq.
+SBY 23:49:21 [work] aig: Warning: Treating a total of 1 undriven bits in bridge_formal like $anyseq.
+SBY 23:49:21 [work] aig: finished (returncode=0)
+SBY 23:49:21 [work] engine_0: starting process "cd work; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
+SBY 23:49:21 [work] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
+SBY 23:49:21 [work] engine_0: Warning: The last 23 outputs are interpreted as constraints.
+SBY 23:49:21 [work] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 299. MonoCNF = no. SkipGen = no. SolveAll = no.
+SBY 23:49:21 [work] engine_0: Proved output 4 in frame 0 (trivial).
+SBY 23:49:21 [work] engine_0: Proved output 5 in frame 0 (trivial).
+SBY 23:49:21 [work] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 23:49:21 [work] engine_0: 1 : 0 5                                                                 1     5      0.00 sec  T/O =  0  PRV =  2
+SBY 23:49:21 [work] engine_0: 2 : 0 6 14                                                              2    17      0.01 sec  T/O =  0  PRV =  2
+SBY 23:49:21 [work] engine_0: Proved output 6 in frame 2.
+SBY 23:49:21 [work] engine_0: Proved output 7 in frame 2.
+SBY 23:49:21 [work] engine_0: 3 : 0 6 5 9 ~11                                                          3    21      0.01 sec  T/O =  0  PRV =  4
+SBY 23:49:21 [work] engine_0: 4 : 0 6 3 6 53 ~15                                                       3   100      0.03 sec  T/O =  0  PRV =  4
+SBY 23:49:21 [work] engine_0: 4 : 0 6 3 7 152 ~15                                                      3   188      0.05 sec  T/O =  0  PRV =  4
+SBY 23:49:21 [work] engine_0: 4 : 0 6 3 7 185 ~15                                                      2   203      0.06 sec  T/O =  0  PRV =  4
+SBY 23:49:21 [work] engine_0: Proved output 2 in frame 4.
+SBY 23:49:21 [work] engine_0: Proved output 8 in frame 4.
+SBY 23:49:21 [work] engine_0: 5 : 0 6 3 4 1 55 ~194                                                    2   237      0.09 sec  T/O =  0  PRV =  6
+SBY 23:49:21 [work] engine_0: 5 : 0 6 3 4 1 105 ~194                                                   2   262      0.11 sec  T/O =  0  PRV =  6
+SBY 23:49:21 [work] engine_0: 5 : 0 6 3 4 1 155 ~194                                                   2   264      0.12 sec  T/O =  0  PRV =  6
+SBY 23:49:21 [work] engine_0: 5 : 0 6 3 4 1 205 ~194                                                   2   276      0.14 sec  T/O =  0  PRV =  6
+SBY 23:49:21 [work] engine_0: 5 : 0 6 3 4 1 239 ~194                                                   2   291      0.16 sec  T/O =  0  PRV =  6
+SBY 23:49:21 [work] engine_0: Proved output 0 in frame 5.
+SBY 23:49:21 [work] engine_0: Proved output 1 in frame 5.
+SBY 23:49:21 [work] engine_0: Proved output 3 in frame 5.
+SBY 23:49:21 [work] engine_0: Proved output 9 in frame 5.
+SBY 23:49:21 [work] engine_0: 6 : 0 6 3 3 1 0 0 ~433                                                   0   291      0.16 sec  T/O =  0  PRV = 10
+SBY 23:49:21 [work] engine_0: Block =   25  Oblig =   873  Clause =   452  Call =  3209 (sat=66.1%)  Cex =   0  Start =   9
+SBY 23:49:21 [work] engine_0: SAT solving =     0.08 sec ( 48.85 %)
+SBY 23:49:21 [work] engine_0: unsat     =     0.00 sec (  1.55 %)
+SBY 23:49:21 [work] engine_0: sat       =     0.08 sec ( 47.30 %)
+SBY 23:49:21 [work] engine_0: Generalize  =     0.11 sec ( 62.99 %)
+SBY 23:49:21 [work] engine_0: Push clause =     0.00 sec (  1.74 %)
+SBY 23:49:21 [work] engine_0: Ternary sim =     0.03 sec ( 15.30 %)
+SBY 23:49:21 [work] engine_0: Containment =     0.00 sec (  0.28 %)
+SBY 23:49:21 [work] engine_0: CNF compute =     0.00 sec (  1.99 %)
+SBY 23:49:21 [work] engine_0: Refinement  =     0.00 sec (  0.00 %)
+SBY 23:49:21 [work] engine_0: TOTAL       =     0.17 sec (100.00 %)
+SBY 23:49:21 [work] engine_0: Property proved.  Time =     0.17 sec
+SBY 23:49:21 [work] engine_0: Counter-example is not available.
+SBY 23:49:21 [work] engine_0: finished (returncode=0)
+SBY 23:49:21 [work] engine_0: Status returned by engine: PASS
+SBY 23:49:21 [work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)
+SBY 23:49:21 [work] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 23:49:21 [work] summary: engine_0 (abc pdr) returned PASS
+SBY 23:49:21 [work] summary: engine_0 did not produce any traces
+SBY 23:49:21 [work] DONE (PASS, rc=0)

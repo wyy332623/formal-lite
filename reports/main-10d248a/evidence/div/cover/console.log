@@ -1,0 +1,97 @@
+SBY 23:49:01 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/div/20261112-234901-cover-ab5cd5/src/rtl/div.v' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/div/20261112-234901-cover-ab5cd5/work/src/rtl/div.v'.
+SBY 23:49:01 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/div/20261112-234901-cover-ab5cd5/src/formal/harness.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/div/20261112-234901-cover-ab5cd5/work/src/formal/harness.sv'.
+SBY 23:49:01 [work] engine_0: smtbmc z3
+SBY 23:49:01 [work] base: starting process "cd work/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 23:49:01 [work] base: finished (returncode=0)
+SBY 23:49:01 [work] prep: starting process "cd work/model; yosys -ql design_prep.log design_prep.ys"
+SBY 23:49:01 [work] prep: finished (returncode=0)
+SBY 23:49:01 [work] smt2: starting process "cd work/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 23:49:01 [work] smt2: finished (returncode=0)
+SBY 23:49:01 [work] engine_0: starting process "cd work; yosys-smtbmc -s z3 --presat -c --noprogress -t 72  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Solver: z3
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 23:49:01 [work] engine_0: ##   0:00:00  Checking cover reachability in step 8..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 9..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 10..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 11..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 12..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 13..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 14..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 15..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 16..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 17..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 18..
+SBY 23:49:02 [work] engine_0: ##   0:00:00  Checking cover reachability in step 19..
+SBY 23:49:03 [work] engine_0: ##   0:00:01  Checking cover reachability in step 20..
+SBY 23:49:03 [work] engine_0: ##   0:00:01  Checking cover reachability in step 21..
+SBY 23:49:03 [work] engine_0: ##   0:00:01  Checking cover reachability in step 22..
+SBY 23:49:03 [work] engine_0: ##   0:00:02  Checking cover reachability in step 23..
+SBY 23:49:04 [work] engine_0: ##   0:00:02  Checking cover reachability in step 24..
+SBY 23:49:04 [work] engine_0: ##   0:00:02  Checking cover reachability in step 25..
+SBY 23:49:05 [work] engine_0: ##   0:00:03  Checking cover reachability in step 26..
+SBY 23:49:06 [work] engine_0: ##   0:00:04  Checking cover reachability in step 27..
+SBY 23:49:06 [work] engine_0: ##   0:00:04  Checking cover reachability in step 28..
+SBY 23:49:07 [work] engine_0: ##   0:00:05  Checking cover reachability in step 29..
+SBY 23:49:06 [work] engine_0: ##   0:00:04  Checking cover reachability in step 30..
+SBY 23:49:07 [work] engine_0: ##   0:00:05  Checking cover reachability in step 31..
+SBY 23:49:07 [work] engine_0: ##   0:00:05  Checking cover reachability in step 32..
+SBY 23:49:08 [work] engine_0: ##   0:00:06  Checking cover reachability in step 33..
+SBY 23:49:10 [work] engine_0: ##   0:00:08  Checking cover reachability in step 34..
+SBY 23:49:11 [work] engine_0: ##   0:00:09  Checking cover reachability in step 35..
+SBY 23:49:12 [work] engine_0: ##   0:00:10  Reached cover statement in step 35 at div_formal: c_cancel_last
+SBY 23:49:12 [work] engine_0: ##   0:00:10  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 23:49:12 [work] engine_0: ##   0:00:10  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 23:49:12 [work] engine_0: ##   0:00:10  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 23:49:12 [work] engine_0: ##   0:00:10  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 23:49:12 [work] engine_0: ##   0:00:10  Checking cover reachability in step 35..
+SBY 23:49:13 [work] engine_0: ##   0:00:11  Checking cover reachability in step 36..
+SBY 23:49:15 [work] engine_0: ##   0:00:13  Reached cover statement in step 36 at div_formal: c_complete
+SBY 23:49:15 [work] engine_0: ##   0:00:13  Writing trace to VCD file: engine_0/trace1.vcd
+SBY 23:49:15 [work] engine_0: ##   0:00:13  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY 23:49:15 [work] engine_0: ##   0:00:13  Writing trace to constraints file: engine_0/trace1.smtc
+SBY 23:49:15 [work] engine_0: ##   0:00:13  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY 23:49:15 [work] engine_0: ##   0:00:13  Checking cover reachability in step 36..
+SBY 23:49:17 [work] engine_0: ##   0:00:15  Checking cover reachability in step 37..
+SBY 23:49:17 [work] engine_0: ##   0:00:15  Reached cover statement in step 37 at div_formal: c_second_operation
+SBY 23:49:17 [work] engine_0: ##   0:00:15  Writing trace to VCD file: engine_0/trace2.vcd
+SBY 23:49:17 [work] engine_0: ##   0:00:16  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY 23:49:17 [work] engine_0: ##   0:00:16  Writing trace to constraints file: engine_0/trace2.smtc
+SBY 23:49:17 [work] engine_0: ##   0:00:16  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY 23:49:17 [work] engine_0: ##   0:00:16  Checking cover reachability in step 37..
+SBY 23:49:18 [work] engine_0: ##   0:00:16  Checking cover reachability in step 38..
+SBY 23:49:19 [work] engine_0: ##   0:00:17  Reached cover statement in step 38 at div_formal: c_restart_after_cancel
+SBY 23:49:19 [work] engine_0: ##   0:00:17  Writing trace to VCD file: engine_0/trace3.vcd
+SBY 23:49:19 [work] engine_0: ##   0:00:17  Writing trace to Verilog testbench: engine_0/trace3_tb.v
+SBY 23:49:19 [work] engine_0: ##   0:00:17  Writing trace to constraints file: engine_0/trace3.smtc
+SBY 23:49:19 [work] engine_0: ##   0:00:17  Writing trace to Yosys witness file: engine_0/trace3.yw
+SBY 23:49:19 [work] engine_0: ##   0:00:17  Checking cover reachability in step 38..
+SBY 23:49:19 [work] engine_0: ##   0:00:17  Checking cover reachability in step 39..
+SBY 23:49:19 [work] engine_0: ##   0:00:18  Reached cover statement in step 39 at div_formal: c_hold
+SBY 23:49:19 [work] engine_0: ##   0:00:18  Writing trace to VCD file: engine_0/trace4.vcd
+SBY 23:49:20 [work] engine_0: ##   0:00:18  Writing trace to Verilog testbench: engine_0/trace4_tb.v
+SBY 23:49:20 [work] engine_0: ##   0:00:18  Writing trace to constraints file: engine_0/trace4.smtc
+SBY 23:49:20 [work] engine_0: ##   0:00:18  Writing trace to Yosys witness file: engine_0/trace4.yw
+SBY 23:49:20 [work] engine_0: ##   0:00:18  Status: passed
+SBY 23:49:20 [work] engine_0: finished (returncode=0)
+SBY 23:49:20 [work] engine_0: Status returned by engine: pass
+SBY 23:49:20 [work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:21 (21)
+SBY 23:49:20 [work] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:19 (19)
+SBY 23:49:20 [work] summary: engine_0 (smtbmc z3) returned pass
+SBY 23:49:20 [work] summary: cover trace: work/engine_0/trace0.vcd
+SBY 23:49:20 [work] summary:   reached cover statement div_formal.c_cancel_last at formal/harness.sv:153.5-153.81 step 35
+SBY 23:49:20 [work] summary: cover trace: work/engine_0/trace1.vcd
+SBY 23:49:20 [work] summary:   reached cover statement div_formal.c_complete at formal/harness.sv:151.5-151.46 step 36
+SBY 23:49:20 [work] summary: cover trace: work/engine_0/trace2.vcd
+SBY 23:49:20 [work] summary:   reached cover statement div_formal.c_second_operation at formal/harness.sv:155.5-155.70 step 37
+SBY 23:49:20 [work] summary: cover trace: work/engine_0/trace3.vcd
+SBY 23:49:20 [work] summary:   reached cover statement div_formal.c_restart_after_cancel at formal/harness.sv:154.5-154.72 step 38
+SBY 23:49:20 [work] summary: cover trace: work/engine_0/trace4.vcd
+SBY 23:49:20 [work] summary:   reached cover statement div_formal.c_hold at formal/harness.sv:152.5-152.62 step 39
+SBY 23:49:20 [work] DONE (PASS, rc=0)

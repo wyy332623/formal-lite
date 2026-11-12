@@ -1,0 +1,28 @@
+SBY 23:46:38 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234639-prove-88080e/src/rtl/mul.v' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234639-prove-88080e/work/src/rtl/mul.v'.
+SBY 23:46:38 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234639-prove-88080e/src/formal/harness.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234639-prove-88080e/work/src/formal/harness.sv'.
+SBY 23:46:38 [work] engine_0: smtbmc bitwuzla
+SBY 23:46:38 [work] base: starting process "cd work/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 23:46:38 [work] base: finished (returncode=0)
+SBY 23:46:38 [work] prep: starting process "cd work/model; yosys -ql design_prep.log design_prep.ys"
+SBY 23:46:38 [work] prep: finished (returncode=0)
+SBY 23:46:38 [work] smt2: starting process "cd work/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 23:46:39 [work] smt2: finished (returncode=0)
+SBY 23:46:39 [work] engine_0.basecase: starting process "cd work; yosys-smtbmc -s bitwuzla --presat --unroll --noprogress -t 1  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 23:46:39 [work] engine_0.induction: starting process "cd work; yosys-smtbmc -s bitwuzla --presat --unroll -i --noprogress -t 1  --append 0 --dump-vcd engine_0/trace_induct.vcd --dump-yw engine_0/trace_induct.yw --dump-vlogtb engine_0/trace_induct_tb.v --dump-smtc engine_0/trace_induct.smtc model/design_smt2.smt2"
+SBY 23:46:39 [work] engine_0.basecase: ##   0:00:00  Solver: bitwuzla
+SBY 23:46:39 [work] engine_0.induction: ##   0:00:00  Solver: bitwuzla
+SBY 23:46:39 [work] engine_0.basecase: ##   0:00:00  Checking assumptions in step 0..
+SBY 23:46:39 [work] engine_0.basecase: ##   0:00:00  Checking assertions in step 0..
+SBY 23:46:39 [work] engine_0.basecase: ##   0:00:00  Status: passed
+SBY 23:46:39 [work] engine_0.basecase: finished (returncode=0)
+SBY 23:46:39 [work] engine_0.basecase: Status returned by engine for basecase: pass
+SBY 23:46:39 [work] engine_0.induction: ##   0:00:00  Trying induction in step 1..
+SBY 23:46:39 [work] engine_0.induction: ##   0:00:00  Trying induction in step 0..
+SBY 23:47:41 [work] engine_0.induction: ##   0:01:02  waiting for solver (1 minute)
+SBY 23:47:41 [work] Reached TIMEOUT (60 seconds). Terminating all subprocesses.
+SBY 23:47:41 [work] engine_0.induction: terminating process
+SBY 23:47:41 [work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:01:01 (61)
+SBY 23:47:41 [work] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 23:47:41 [work] summary: engine_0 (smtbmc bitwuzla) returned pass for basecase
+SBY 23:47:41 [work] summary: engine_0 did not produce any traces
+SBY 23:47:41 [work] DONE (TIMEOUT, rc=8)

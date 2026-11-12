@@ -1,23 +1,17 @@
-# 工作区配置验证记录
+# 验证记录
 
-日期：2026-11-12（Asia/Shanghai）。
+本轮按用户授权接续历史 exp15，为 div、mul、AXI 建立独立用例，并将工作区纳入 Git、保存到 GitHub。被测源码没有修改。
 
-- 主机目录：D:/PersonalPrograms/calab/formal-lite，与原实验目录并列。
-- 运行环境：WSL 发行版 Ubuntu-22.04，使用 /usr/bin/python3 调用隔离工具链。
-- 工具包：OSS CAD Suite 2026-11-12 Linux x64；归档大小750616226字节，SHA-256为346499255e3e5e6e9bf67e1d378a4e6bc249abd3de3b0caf5b57604bc8ba1752，与官方GitHub资产元数据一致。
-- doctor：ready=true；Yosys 0.70+385（098e46a36），SBY v0.70-9-g79fc9ed，Z3 4.15.5。
+calab main 获取时为 `10d248abc6af8811e506909dd61cc3ddc498ccaf`；三个 RTL 的锁定哈希见 [sources.lock.json](sources.lock.json)。实际状态、深度、超时、引擎及精简原始证据见 [结果索引](reports/main-10d248a/INDEX.md) 和 [结果 JSON](reports/main-10d248a/results.json)。
 
-最终自检使用更新后的 run.py/worker.py，结果如下：
-
-| 任务 | 结果 | 结果目录 |
+| 对象 | 验证支持 | 结论边界 |
 | --- | --- | --- |
-| smoke bmc | BMC_PASS，20步 | results/smoke/20261112-230239-bmc-28d92b |
-| smoke prove | PROVED | results/smoke/20261112-230243-prove-b40740 |
-| smoke cover | COVER_REACHED，生成VCD | results/smoke/20261112-230244-cover-03c34f |
-| smoke fault | 按预期FAIL，生成反例VCD | results/smoke/20261112-230245-fault-6b80f2 |
+| mul | 独立算术参考、所有有符号/无符号 8 位数值、128 个固定全位宽边界组合、覆盖及故障注入 | 局部通过不代表全部 32 位输入已证明；全域超时保持未完成 |
+| div | 独立受理/32 次迭代/完成保持模型，取消、后续任意复位、重启，除法/取模算术参考，受限域与八组边界值 | 控制证明不含算术；40 步 BMC 不称为长期证明，也不覆盖两次完整除法 |
+| AXI | 事务账本、载荷、数据、完成顺序、独立反压、单/双请求范围、响应排空与覆盖 | 单请求安全性证明不含一般完成性、组合依赖、地址相关读写阻塞或任意容量 |
 
-每个目录包含源码快照、SHA-256、生成的SBY配置、工具版本、假设、日志及结果JSON。整体SELF-TEST PASS，最新索引见 results/self-test-latest.json。
+AXI general BMC 复现写响应越过较早 MEM load 的错误；IF-only delivery BMC 找到连续两个取指 R 响应只产生一次完成通知的错误。两者都需要同端口两笔未完成请求。确定性测试台在 Yosys 导出网表上的 Icarus 回放再次确认，见 [回放日志](reports/main-10d248a/evidence/axi/replay/simulation.log)。该回放独立于 formal harness，但不证明原 RTL 可直接在 Icarus 编译：rd_busy 未声明，由 Yosys 推断为寄存器。
 
-另外确认：所有配置JSON可解析，PowerShell入口可列出用例，未配置的exp15被NEEDS_CONFIGURATION阻止且返回码为2。exp15目前只有输入/协议/任务模板，没有接入真实转接桥，因此没有其验证结论。
+工具包为 OSS CAD Suite 2026-11-12，WSL Ubuntu-22.04；Yosys 0.70+385、SBY v0.70-9-g79fc9ed、Z3 4.15.5。实际使用的 ABC/Bitwuzla 版本在任务 result.json 中。doctor ready=true；公共自检的 bmc/prove/cover 及故意失败反例必须全部符合预期，最新索引见 [self-test.json](reports/main-10d248a/self-test.json)。
 
-原实验仓库的tracked文件状态保持操作前已有的README.md、myCPU/stage3_ex.v修改；本次没有修改或提交实验RTL。
+未修复、提交或推送 calab RTL，没有将 UNKNOWN/ERROR/TIMEOUT 计为通过。实际设计反例仍令 regress 返回非零退出码。历史记录见 [HANDOFF.md](HANDOFF.md)；原“exp15 未接入 RTL”的说法只适用于初始模板阶段，已不适用于当前状态。

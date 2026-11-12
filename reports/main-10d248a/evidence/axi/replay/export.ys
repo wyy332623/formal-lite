@@ -1,0 +1,3 @@
+read_verilog dut.v
+prep -top axi_bridge
+write_verilog -noattr dut-netlist.v

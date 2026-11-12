@@ -1,0 +1,5 @@
+VCD info: dumpfile replay.vcd opened for output.
+REPRODUCED: later MEM write completes before earlier read response
+REPRODUCED: two consecutive IF R responses yield only 1 completion
+REPLAY CONFIRMED TWO DESIGN FAILURES; this is not a DUT pass
+replay_tb.sv:101: $finish called at 300000 (1ps)

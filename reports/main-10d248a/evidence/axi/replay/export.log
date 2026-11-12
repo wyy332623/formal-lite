@@ -1,0 +1,286 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.70+385 (git sha1 098e46a36, Release, Clang /usr/bin/clang++ 21.1.8)
+
+-- Executing script file `export.ys' --
+
+1. Executing Verilog-2005 frontend: dut.v
+Parsing Verilog input from `dut.v' to AST representation.
+Generating RTLIL representation for module `\axi_bridge'.
+Warning: wire '\rd_busy' is assigned in a block at dut.v:183.9-183.24.
+Warning: wire '\rd_busy' is assigned in a block at dut.v:187.13-187.28.
+Warning: wire '\rd_busy' is assigned in a block at dut.v:190.13-190.28.
+dut.v:183: Warning: Identifier `\rd_busy' is implicitly declared.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \axi_bridge
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \axi_bridge
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 4 switch rules as full_case in process $dut.v:241$proc$43 in module axi_bridge.
+Marked 2 switch rules as full_case in process $dut.v:212$proc$22 in module axi_bridge.
+Marked 1 switch rules as full_case in process $dut.v:180$proc$16 in module axi_bridge.
+Marked 1 switch rules as full_case in process $dut.v:146$proc$7 in module axi_bridge.
+Marked 1 switch rules as full_case in process $dut.v:110$proc$5 in module axi_bridge.
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~32 debug messages>
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\axi_bridge.$dut.v:241$proc$43'.
+     1/1: $0\w_state[1:0]
+Creating decoders for process `\axi_bridge.$dut.v:212$proc$22'.
+     1/1: $0\ar_state[1:0]
+Creating decoders for process `\axi_bridge.$dut.v:180$proc$16'.
+     1/2: $0\rd_busy[0:0]
+     2/2: $0\wr_busy[0:0]
+Creating decoders for process `\axi_bridge.$dut.v:146$proc$7'.
+     1/4: $0\mem_rdata_r[31:0]
+     2/4: $0\mem_rsp_vld[0:0]
+     3/4: $0\if_rdata_r[31:0]
+     4/4: $0\if_rsp_vld[0:0]
+Creating decoders for process `\axi_bridge.$dut.v:110$proc$5'.
+     1/8: $0\mem_wdata_r[31:0]
+     2/8: $0\mem_addr_r[31:0]
+     3/8: $0\mem_wstrb_r[3:0]
+     4/8: $0\mem_size_r[2:0]
+     5/8: $0\mem_wr_r[0:0]
+     6/8: $0\mem_pend[0:0]
+     7/8: $0\if_addr_r[31:0]
+     8/8: $0\if_pend[0:0]
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\axi_bridge.\w_state' using process `\axi_bridge.$dut.v:241$proc$43'.
+  created $dff cell `$procdff$190' with positive edge clock.
+Creating register for signal `\axi_bridge.\ar_state' using process `\axi_bridge.$dut.v:212$proc$22'.
+  created $dff cell `$procdff$191' with positive edge clock.
+Creating register for signal `\axi_bridge.\wr_busy' using process `\axi_bridge.$dut.v:180$proc$16'.
+  created $dff cell `$procdff$192' with positive edge clock.
+Creating register for signal `\axi_bridge.\rd_busy' using process `\axi_bridge.$dut.v:180$proc$16'.
+  created $dff cell `$procdff$193' with positive edge clock.
+Creating register for signal `\axi_bridge.\if_rsp_vld' using process `\axi_bridge.$dut.v:146$proc$7'.
+  created $dff cell `$procdff$194' with positive edge clock.
+Creating register for signal `\axi_bridge.\if_rdata_r' using process `\axi_bridge.$dut.v:146$proc$7'.
+  created $dff cell `$procdff$195' with positive edge clock.
+Creating register for signal `\axi_bridge.\mem_rsp_vld' using process `\axi_bridge.$dut.v:146$proc$7'.
+  created $dff cell `$procdff$196' with positive edge clock.
+Creating register for signal `\axi_bridge.\mem_rdata_r' using process `\axi_bridge.$dut.v:146$proc$7'.
+  created $dff cell `$procdff$197' with positive edge clock.
+Creating register for signal `\axi_bridge.\if_pend' using process `\axi_bridge.$dut.v:110$proc$5'.
+  created $dff cell `$procdff$198' with positive edge clock.
+Creating register for signal `\axi_bridge.\if_addr_r' using process `\axi_bridge.$dut.v:110$proc$5'.
+  created $dff cell `$procdff$199' with positive edge clock.
+Creating register for signal `\axi_bridge.\mem_pend' using process `\axi_bridge.$dut.v:110$proc$5'.
+  created $dff cell `$procdff$200' with positive edge clock.
+Creating register for signal `\axi_bridge.\mem_wr_r' using process `\axi_bridge.$dut.v:110$proc$5'.
+  created $dff cell `$procdff$201' with positive edge clock.
+Creating register for signal `\axi_bridge.\mem_size_r' using process `\axi_bridge.$dut.v:110$proc$5'.
+  created $dff cell `$procdff$202' with positive edge clock.
+Creating register for signal `\axi_bridge.\mem_wstrb_r' using process `\axi_bridge.$dut.v:110$proc$5'.
+  created $dff cell `$procdff$203' with positive edge clock.
+Creating register for signal `\axi_bridge.\mem_addr_r' using process `\axi_bridge.$dut.v:110$proc$5'.
+  created $dff cell `$procdff$204' with positive edge clock.
+Creating register for signal `\axi_bridge.\mem_wdata_r' using process `\axi_bridge.$dut.v:110$proc$5'.
+  created $dff cell `$procdff$205' with positive edge clock.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\axi_bridge.$dut.v:241$proc$43'.
+Removing empty process `axi_bridge.$dut.v:241$proc$43'.
+Found and cleaned up 6 empty switches in `\axi_bridge.$dut.v:212$proc$22'.
+Removing empty process `axi_bridge.$dut.v:212$proc$22'.
+Found and cleaned up 6 empty switches in `\axi_bridge.$dut.v:180$proc$16'.
+Removing empty process `axi_bridge.$dut.v:180$proc$16'.
+Found and cleaned up 7 empty switches in `\axi_bridge.$dut.v:146$proc$7'.
+Removing empty process `axi_bridge.$dut.v:146$proc$7'.
+Found and cleaned up 5 empty switches in `\axi_bridge.$dut.v:110$proc$5'.
+Removing empty process `axi_bridge.$dut.v:110$proc$5'.
+Cleaned up 32 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_bridge.
+<suppressed ~24 debug messages>
+
+2.3. Executing FUTURE pass.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_bridge.
+
+2.5. Executing CHECK pass (checking for obvious problems).
+Checking module axi_bridge...
+Found and reported 0 problems.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_bridge..
+Removed 11 unused cells and 96 unused wires.
+<suppressed ~14 debug messages>
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_bridge.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_bridge'.
+Computing hashes of 118 cells of `\axi_bridge'.
+Finding duplicate cells in `\axi_bridge'.
+Computing hashes of 104 cells of `\axi_bridge'.
+Finding duplicate cells in `\axi_bridge'.
+<suppressed ~42 debug messages>
+Removed a total of 14 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_bridge..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$139: \if_rsp_vld -> 1'0
+      Replacing known input bits on port A of cell $procmux$137: \if_rsp_vld -> 1'0
+      Replacing known input bits on port A of cell $procmux$121: \mem_rsp_vld -> 1'0
+      Replacing known input bits on port A of cell $procmux$119: \mem_rsp_vld -> 1'0
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~72 debug messages>
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_bridge.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_bridge'.
+Computing hashes of 104 cells of `\axi_bridge'.
+Finding duplicate cells in `\axi_bridge'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_bridge..
+Removed 0 unused cells and 13 unused wires.
+<suppressed ~1 debug messages>
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_bridge.
+
+2.7.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.7.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_bridge..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~72 debug messages>
+
+2.7.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_bridge.
+Performed a total of 0 changes.
+
+2.7.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_bridge'.
+Computing hashes of 104 cells of `\axi_bridge'.
+Finding duplicate cells in `\axi_bridge'.
+Removed a total of 0 cells.
+
+2.7.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_bridge..
+
+2.7.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_bridge.
+
+2.7.14. Finished fast OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+Removed top 3 bits (of 4) from port B of cell axi_bridge.$dut.v:156$eq$10 ($eq).
+Removed top 1 bits (of 2) from port B of cell axi_bridge.$procmux$68_CMP0 ($eq).
+Removed top 1 bits (of 2) from port B of cell axi_bridge.$procmux$84_CMP0 ($eq).
+
+2.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_bridge..
+
+2.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.11. Executing OPT pass (performing simple optimizations).
+
+2.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_bridge.
+
+2.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_bridge'.
+Computing hashes of 104 cells of `\axi_bridge'.
+Finding duplicate cells in `\axi_bridge'.
+Removed a total of 0 cells.
+
+2.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_bridge..
+
+2.11.4. Finished fast OPT passes.
+
+2.12. Executing SORT pass.
+
+2.13. Printing statistics.
+
+=== axi_bridge ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      155 wires
+     1083 wire bits
+       80 public wires
+      612 public wire bits
+       56 ports
+      426 port bits
+      104 cells
+       11   $and
+       15   $dff
+        6   $eq
+        4   $logic_and
+        4   $logic_not
+       52   $mux
+        2   $not
+        7   $or
+        2   $pmux
+        1   $reduce_or
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module axi_bridge...
+Found and reported 0 problems.
+
+3. Executing Verilog backend.
+
+3.1. Executing BMUXMAP pass.
+
+3.2. Executing DEMUXMAP pass.
+Dumping module `\axi_bridge'.
+
+Warnings: 4 unique messages, 4 total
+End of script. Logfile hash: 9be13c83d0, time: 0.23s, user: 0.02s, system: 0.01s, MEM: 21.33 MB peak
+Yosys 0.70+385 (git sha1 098e46a36, Release, Clang /usr/bin/clang++ 21.1.8)
+Time spent: 19% 5x opt_clean (0 sec), 18% 2x read_verilog (0 sec), ...

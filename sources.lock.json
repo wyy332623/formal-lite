@@ -1,0 +1,21 @@
+{
+  "format_version": 1,
+  "remote": "https://github.com/wyy332623/calab.git",
+  "branch_observed": "main",
+  "commit": "10d248abc6af8811e506909dd61cc3ddc498ccaf",
+  "directory": "sources/calab-main-10d248a",
+  "sha256": {
+    "myCPU/div.v": "1adea77d84f7b3bcd8118be25f12a6cc710f0c1f915b146119c47340790b8a46",
+    "myCPU/mul.v": "24fd38b9a19e63caa29bcaa6119ab0d934c41e84fa40a3119f77bee8802669db",
+    "myCPU/axi_bridge.v": "3b3be22004a443ccc4afcc6345e08751707fdf6a368d80f6bbf0ea64deb45f51"
+  },
+  "checkout": {
+    "core.autocrlf": true,
+    "note": "Explicit CRLF text checkout reproduces historical Windows input bytes on Windows and Linux; div/mul blobs already contain CRLF."
+  },
+  "git_blob_sha256": {
+    "myCPU/div.v": "1adea77d84f7b3bcd8118be25f12a6cc710f0c1f915b146119c47340790b8a46",
+    "myCPU/mul.v": "24fd38b9a19e63caa29bcaa6119ab0d934c41e84fa40a3119f77bee8802669db",
+    "myCPU/axi_bridge.v": "1c45c4e46a9e21d511d47832c84f659cf6959a5e5a4f5612ff59c4356dbef229"
+  }
+}

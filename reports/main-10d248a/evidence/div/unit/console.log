@@ -1,0 +1,99 @@
+SBY 23:50:52 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/div/20261112-235053-unit-37a3ba/src/rtl/div.v' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/div/20261112-235053-unit-37a3ba/work/src/rtl/div.v'.
+SBY 23:50:52 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/div/20261112-235053-unit-37a3ba/src/formal/harness.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/div/20261112-235053-unit-37a3ba/work/src/formal/harness.sv'.
+SBY 23:50:52 [work] engine_0: smtbmc z3
+SBY 23:50:52 [work] base: starting process "cd work/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 23:50:53 [work] base: finished (returncode=0)
+SBY 23:50:53 [work] prep: starting process "cd work/model; yosys -ql design_prep.log design_prep.ys"
+SBY 23:50:53 [work] prep: finished (returncode=0)
+SBY 23:50:53 [work] smt2: starting process "cd work/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 23:50:53 [work] smt2: finished (returncode=0)
+SBY 23:50:53 [work] engine_0: starting process "cd work; yosys-smtbmc -s z3 --presat --noprogress -t 40  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Solver: z3
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 4..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 4..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 5..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 5..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 6..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 6..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 7..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 7..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 8..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 8..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 9..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 9..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 10..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 10..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 11..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assertions in step 11..
+SBY 23:50:53 [work] engine_0: ##   0:00:00  Checking assumptions in step 12..
+SBY 23:50:54 [work] engine_0: ##   0:00:00  Checking assertions in step 12..
+SBY 23:50:54 [work] engine_0: ##   0:00:00  Checking assumptions in step 13..
+SBY 23:50:54 [work] engine_0: ##   0:00:01  Checking assertions in step 13..
+SBY 23:50:54 [work] engine_0: ##   0:00:01  Checking assumptions in step 14..
+SBY 23:50:54 [work] engine_0: ##   0:00:01  Checking assertions in step 14..
+SBY 23:50:54 [work] engine_0: ##   0:00:01  Checking assumptions in step 15..
+SBY 23:50:55 [work] engine_0: ##   0:00:01  Checking assertions in step 15..
+SBY 23:50:55 [work] engine_0: ##   0:00:01  Checking assumptions in step 16..
+SBY 23:50:55 [work] engine_0: ##   0:00:02  Checking assertions in step 16..
+SBY 23:50:55 [work] engine_0: ##   0:00:02  Checking assumptions in step 17..
+SBY 23:50:56 [work] engine_0: ##   0:00:03  Checking assertions in step 17..
+SBY 23:50:56 [work] engine_0: ##   0:00:03  Checking assumptions in step 18..
+SBY 23:50:57 [work] engine_0: ##   0:00:03  Checking assertions in step 18..
+SBY 23:50:57 [work] engine_0: ##   0:00:03  Checking assumptions in step 19..
+SBY 23:50:58 [work] engine_0: ##   0:00:04  Checking assertions in step 19..
+SBY 23:50:58 [work] engine_0: ##   0:00:04  Checking assumptions in step 20..
+SBY 23:50:58 [work] engine_0: ##   0:00:05  Checking assertions in step 20..
+SBY 23:50:59 [work] engine_0: ##   0:00:05  Checking assumptions in step 21..
+SBY 23:50:59 [work] engine_0: ##   0:00:05  Checking assertions in step 21..
+SBY 23:50:59 [work] engine_0: ##   0:00:06  Checking assumptions in step 22..
+SBY 23:51:01 [work] engine_0: ##   0:00:07  Checking assertions in step 22..
+SBY 23:51:01 [work] engine_0: ##   0:00:07  Checking assumptions in step 23..
+SBY 23:51:02 [work] engine_0: ##   0:00:08  Checking assertions in step 23..
+SBY 23:51:02 [work] engine_0: ##   0:00:08  Checking assumptions in step 24..
+SBY 23:51:06 [work] engine_0: ##   0:00:12  Checking assertions in step 24..
+SBY 23:51:06 [work] engine_0: ##   0:00:12  Checking assumptions in step 25..
+SBY 23:51:07 [work] engine_0: ##   0:00:14  Checking assertions in step 25..
+SBY 23:51:08 [work] engine_0: ##   0:00:14  Checking assumptions in step 26..
+SBY 23:51:08 [work] engine_0: ##   0:00:15  Checking assertions in step 26..
+SBY 23:51:09 [work] engine_0: ##   0:00:15  Checking assumptions in step 27..
+SBY 23:51:09 [work] engine_0: ##   0:00:16  Checking assertions in step 27..
+SBY 23:51:09 [work] engine_0: ##   0:00:16  Checking assumptions in step 28..
+SBY 23:51:12 [work] engine_0: ##   0:00:18  Checking assertions in step 28..
+SBY 23:51:12 [work] engine_0: ##   0:00:19  Checking assumptions in step 29..
+SBY 23:51:13 [work] engine_0: ##   0:00:19  Checking assertions in step 29..
+SBY 23:51:13 [work] engine_0: ##   0:00:20  Checking assumptions in step 30..
+SBY 23:51:15 [work] engine_0: ##   0:00:22  Checking assertions in step 30..
+SBY 23:51:16 [work] engine_0: ##   0:00:22  Checking assumptions in step 31..
+SBY 23:51:18 [work] engine_0: ##   0:00:25  Checking assertions in step 31..
+SBY 23:51:18 [work] engine_0: ##   0:00:25  Checking assumptions in step 32..
+SBY 23:51:19 [work] engine_0: ##   0:00:26  Checking assertions in step 32..
+SBY 23:51:20 [work] engine_0: ##   0:00:26  Checking assumptions in step 33..
+SBY 23:51:20 [work] engine_0: ##   0:00:27  Checking assertions in step 33..
+SBY 23:51:21 [work] engine_0: ##   0:00:27  Checking assumptions in step 34..
+SBY 23:51:26 [work] engine_0: ##   0:00:32  Checking assertions in step 34..
+SBY 23:51:26 [work] engine_0: ##   0:00:33  Checking assumptions in step 35..
+SBY 23:51:29 [work] engine_0: ##   0:00:36  Checking assertions in step 35..
+SBY 23:51:29 [work] engine_0: ##   0:00:36  Checking assumptions in step 36..
+SBY 23:51:33 [work] engine_0: ##   0:00:40  Checking assertions in step 36..
+SBY 23:51:40 [work] engine_0: ##   0:00:46  Checking assumptions in step 37..
+SBY 23:51:40 [work] engine_0: ##   0:00:47  Checking assertions in step 37..
+SBY 23:51:48 [work] engine_0: ##   0:00:54  Checking assumptions in step 38..
+SBY 23:51:52 [work] engine_0: ##   0:00:58  Checking assertions in step 38..
+SBY 23:51:59 [work] engine_0: ##   0:01:06  Checking assumptions in step 39..
+SBY 23:52:03 [work] engine_0: ##   0:01:10  Checking assertions in step 39..
+SBY 23:52:12 [work] engine_0: ##   0:01:18  Status: passed
+SBY 23:52:12 [work] engine_0: finished (returncode=0)
+SBY 23:52:12 [work] engine_0: Status returned by engine: pass
+SBY 23:52:12 [work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:01:22 (82)
+SBY 23:52:12 [work] summary: Elapsed process time [H:MM:SS (secs)]: 0:01:18 (78)
+SBY 23:52:12 [work] summary: engine_0 (smtbmc z3) returned pass
+SBY 23:52:12 [work] summary: engine_0 did not produce any traces
+SBY 23:52:12 [work] DONE (PASS, rc=0)

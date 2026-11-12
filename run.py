@@ -73,8 +73,8 @@ def run_case(config, name, task, depth=None, timeout=None):
     mode = selection["mode"]
     if mode not in ("bmc", "prove", "cover"):
         raise ValueError("Unsupported task mode")
-    depth = depth or selection.get("depth", config["default_depth"])
-    timeout = timeout or selection.get("timeout_seconds", config["default_timeout_seconds"])
+    depth = selection.get("depth", config["default_depth"]) if depth is None else depth
+    timeout = selection.get("timeout_seconds", config["default_timeout_seconds"]) if timeout is None else timeout
     if depth <= 0 or timeout <= 0:
         raise ValueError("Depth and timeout must be positive")
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -128,7 +128,16 @@ def run_case(config, name, task, depth=None, timeout=None):
     assumptions = case.get("assumptions_file")
     if assumptions:
         shutil.copy2(case_dir / assumptions, run_dir / "assumptions.md")
+    metadata_file = case_dir / "source.json"
+    source_metadata = read_json(metadata_file) if metadata_file.exists() else None
+    if source_metadata:
+        matches = [m for m in manifest if Path(m["path"]).name == Path(source_metadata["source"]).name]
+        if len(matches) != 1 or matches[0]["sha256"] != source_metadata["sha256"]:
+            raise ValueError("DUT differs from pinned source.json; create a new input snapshot")
     request = {"case": name, "task": task, "mode": mode, "depth": depth,
+               "source_metadata": source_metadata,
+               "defines": defines,
+               "case_config_sha256": hashlib.sha256((case_dir / "case.json").read_bytes()).hexdigest(),
                "engine": engine,
                "timeout_seconds": timeout, "expected_raw_status": selection.get("expected_raw_status", "PASS"),
                "assumptions_file": "assumptions.md" if assumptions else None, "source_manifest": manifest}

@@ -1,0 +1,17 @@
+[options]
+mode bmc
+depth 18
+timeout 90
+
+[engines]
+smtbmc z3
+
+[script]
+read_verilog -formal -sv -DSTABILITY_ONLY -DIF_ONLY -DDRAIN_CHECK -Irtl -Iformal rtl/axi_bridge.v formal/harness.sv
+prep -top bridge_formal
+
+[files]
+rtl/axi_bridge.v src/rtl/axi_bridge.v
+formal/environment.sv src/formal/environment.sv
+formal/properties.sv src/formal/properties.sv
+formal/harness.sv src/formal/harness.sv

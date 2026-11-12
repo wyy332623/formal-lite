@@ -1,0 +1,39 @@
+{
+  "confirmed_two_design_failures": true,
+  "returncode": 0,
+  "source_metadata": {
+    "remote": "https://github.com/wyy332623/calab.git",
+    "branch": "main",
+    "commit": "10d248abc6af8811e506909dd61cc3ddc498ccaf",
+    "module": "axi_bridge",
+    "source": "myCPU/axi_bridge.v",
+    "sha256": "3b3be22004a443ccc4afcc6345e08751707fdf6a368d80f6bbf0ea64deb45f51"
+  },
+  "tools": {
+    "yosys": {
+      "ok": true,
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/yosys",
+      "version": "Yosys 0.70+385 (git sha1 098e46a36, Release, Clang /usr/bin/clang++ 21.1.8)"
+    },
+    "sby": {
+      "ok": true,
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/sby",
+      "version": "SBY v0.70-9-g79fc9ed"
+    },
+    "z3": {
+      "ok": true,
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/z3",
+      "version": "Z3 version 4.15.5 - 64 bit"
+    },
+    "iverilog": {
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/iverilog",
+      "version": "Icarus Verilog version 14.0 (devel) (s20260301-966-g3992ea6a3-dirty)"
+    },
+    "vvp": {
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/vvp",
+      "version": "Icarus Verilog runtime version 14.0 (devel) (s20260301-966-g3992ea6a3-dirty)"
+    }
+  },
+  "method": "unmodified RTL exported by Yosys, deterministic port-only Icarus testbench",
+  "limitation": "Yosys infers undeclared rd_busy as a register; direct original-RTL Icarus compatibility is not claimed"
+}

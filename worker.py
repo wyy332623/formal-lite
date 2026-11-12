@@ -22,16 +22,23 @@ def child_env(suite):
     return result
 
 
-def doctor(config):
+def doctor(config, engine=None):
     suite = Path(config["toolchain_root"]).expanduser()
     versions = {}
-    for name, arg in [("yosys", "-V"), ("sby", "--version"), (config["solver"], "--version")]:
+    checks = [("yosys", ["-V"]), ("sby", ["--version"]), (config["solver"], ["--version"])]
+    if engine == "abc pdr":
+        checks.append(("yosys-abc", ["-c", "version"]))
+    elif engine and engine.startswith("smtbmc "):
+        selected_solver = engine.split()[1]
+        if selected_solver != config["solver"]:
+            checks.append((selected_solver, ["--version"]))
+    for name, args in checks:
         exe = suite / "bin" / name
         if not exe.is_file():
             versions[name] = {"ok": False, "path": str(exe), "message": "missing"}
             continue
         try:
-            p = subprocess.run([str(exe), arg], env=child_env(suite), text=True,
+            p = subprocess.run([str(exe), *args], env=child_env(suite), text=True,
                                capture_output=True, timeout=20)
             versions[name] = {"ok": p.returncode == 0, "path": str(exe),
                               "version": (p.stdout + p.stderr).strip()}
@@ -68,7 +75,7 @@ def execute(config, run_dir):
     run_dir = Path(run_dir)
     request = read_json(run_dir / "request.json")
     suite = Path(config["toolchain_root"]).expanduser()
-    inspection = doctor(config)
+    inspection = doctor(config, request.get("engine"))
     if not inspection["ready"]:
         raise RuntimeError("Toolchain is not ready; run bootstrap/doctor first")
     started = time.monotonic()
@@ -104,6 +111,9 @@ def execute(config, run_dir):
               "depth": request["depth"], "timeout_seconds": request["timeout_seconds"],
               "elapsed_seconds": round(time.monotonic() - started, 3), "tools": inspection["tools"],
               "source_manifest": request["source_manifest"],
+              "source_metadata": request.get("source_metadata"),
+              "defines": request.get("defines", []),
+              "case_config_sha256": request.get("case_config_sha256"),
               "waveforms": [str(p.relative_to(run_dir)) for p in run_dir.glob("work/**/*.vcd")],
               "assumptions_file": request.get("assumptions_file"), "log": "console.log"}
     (run_dir / "result.json").write_text(json.dumps(result, indent=2), encoding="utf-8")

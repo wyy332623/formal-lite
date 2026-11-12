@@ -1,0 +1,100 @@
+{
+  "name": "div",
+  "enabled": true,
+  "top": "div_formal",
+  "files": [
+    {
+      "path": "../../sources/calab-main-10d248a/myCPU/div.v",
+      "dest": "rtl/div.v"
+    },
+    {
+      "path": "harness.sv",
+      "dest": "formal/harness.sv"
+    }
+  ],
+  "assumptions_file": "assumptions.md",
+  "tasks": {
+    "control": {
+      "mode": "prove",
+      "depth": 36,
+      "timeout_seconds": 90,
+      "defines": [
+        "CONTROL_ONLY"
+      ],
+      "engine": "abc pdr"
+    },
+    "bmc": {
+      "mode": "bmc",
+      "depth": 40,
+      "timeout_seconds": 90
+    },
+    "prove": {
+      "mode": "prove",
+      "depth": 36,
+      "timeout_seconds": 90
+    },
+    "small": {
+      "mode": "bmc",
+      "depth": 40,
+      "timeout_seconds": 90,
+      "defines": [
+        "SMALL_OPERANDS"
+      ]
+    },
+    "zero": {
+      "mode": "bmc",
+      "depth": 40,
+      "timeout_seconds": 60,
+      "defines": [
+        "ZERO_DIVISOR"
+      ]
+    },
+    "unit": {
+      "mode": "bmc",
+      "depth": 40,
+      "timeout_seconds": 150,
+      "defines": [
+        "UNIT_DIVISOR"
+      ]
+    },
+    "cover": {
+      "mode": "cover",
+      "depth": 72,
+      "timeout_seconds": 90,
+      "defines": [
+        "CONTROL_ONLY"
+      ]
+    },
+    "arithmetic_cover": {
+      "mode": "cover",
+      "depth": 40,
+      "timeout_seconds": 90
+    },
+    "fault": {
+      "mode": "bmc",
+      "depth": 40,
+      "timeout_seconds": 60,
+      "defines": [
+        "ZERO_DIVISOR",
+        "INJECT_CHECKER_FAULT"
+      ],
+      "expected_raw_status": "FAIL"
+    },
+    "corners": {
+      "mode": "bmc",
+      "depth": 40,
+      "timeout_seconds": 90,
+      "defines": [
+        "CORNER_VECTORS"
+      ]
+    },
+    "corner_cover": {
+      "mode": "cover",
+      "depth": 40,
+      "timeout_seconds": 90,
+      "defines": [
+        "CORNER_VECTORS"
+      ]
+    }
+  }
+}

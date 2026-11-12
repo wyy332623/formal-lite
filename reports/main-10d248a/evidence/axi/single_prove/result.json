@@ -1,0 +1,73 @@
+{
+  "case": "axi",
+  "task": "single_prove",
+  "mode": "prove",
+  "engine": "abc pdr",
+  "status": "PROVED",
+  "raw_status": "PASS",
+  "returncode": 0,
+  "expected_raw_status": "PASS",
+  "expected_result_observed": true,
+  "depth": 16,
+  "timeout_seconds": 90,
+  "elapsed_seconds": 4.682,
+  "tools": {
+    "yosys": {
+      "ok": true,
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/yosys",
+      "version": "Yosys 0.70+385 (git sha1 098e46a36, Release, Clang /usr/bin/clang++ 21.1.8)"
+    },
+    "sby": {
+      "ok": true,
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/sby",
+      "version": "SBY v0.70-9-g79fc9ed"
+    },
+    "z3": {
+      "ok": true,
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/z3",
+      "version": "Z3 version 4.15.5 - 64 bit"
+    },
+    "yosys-abc": {
+      "ok": true,
+      "path": "/home/wangyuyang/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite/bin/yosys-abc",
+      "version": "======== ABC command line \"version\"\nUC Berkeley, ABC 1.01 (compiled Nov 12 2026 07:39:40)"
+    }
+  },
+  "source_manifest": [
+    {
+      "path": "D:\\PersonalPrograms\\calab\\formal-lite\\sources\\calab-main-10d248a\\myCPU\\axi_bridge.v",
+      "staged_as": "rtl/axi_bridge.v",
+      "sha256": "3b3be22004a443ccc4afcc6345e08751707fdf6a368d80f6bbf0ea64deb45f51"
+    },
+    {
+      "path": "D:\\PersonalPrograms\\calab\\formal-lite\\cases\\axi\\environment.sv",
+      "staged_as": "formal/environment.sv",
+      "sha256": "ae95ef80cc3e93ec7b49c03e92d7b21e3ebae50080a5d351a9f612201372d8ea"
+    },
+    {
+      "path": "D:\\PersonalPrograms\\calab\\formal-lite\\cases\\axi\\properties.sv",
+      "staged_as": "formal/properties.sv",
+      "sha256": "afa043318fcc4aa8ba930601541f6fc0aa2e19907ac1deb0fbfd5a70099cf72f"
+    },
+    {
+      "path": "D:\\PersonalPrograms\\calab\\formal-lite\\cases\\axi\\harness.sv",
+      "staged_as": "formal/harness.sv",
+      "sha256": "f2a7e04d07d1f4a12b44bd8e6f2326b576f232bca324d7fb464311e644731db9"
+    }
+  ],
+  "source_metadata": {
+    "remote": "https://github.com/wyy332623/calab.git",
+    "branch": "main",
+    "commit": "10d248abc6af8811e506909dd61cc3ddc498ccaf",
+    "module": "axi_bridge",
+    "source": "myCPU/axi_bridge.v",
+    "sha256": "3b3be22004a443ccc4afcc6345e08751707fdf6a368d80f6bbf0ea64deb45f51"
+  },
+  "defines": [
+    "REQUEST_LIMIT=1"
+  ],
+  "case_config_sha256": "eb7651d13bc710dd8213a93eee3e6317fd66165030f5df07ade0deb2a4046352",
+  "waveforms": [],
+  "assumptions_file": "assumptions.md",
+  "log": "console.log"
+}

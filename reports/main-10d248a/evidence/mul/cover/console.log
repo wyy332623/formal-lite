@@ -1,0 +1,43 @@
+SBY 23:47:36 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234736-cover-2cf54b/src/rtl/mul.v' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234736-cover-2cf54b/work/src/rtl/mul.v'.
+SBY 23:47:36 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234736-cover-2cf54b/src/formal/harness.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234736-cover-2cf54b/work/src/formal/harness.sv'.
+SBY 23:47:37 [work] engine_0: smtbmc z3
+SBY 23:47:37 [work] base: starting process "cd work/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 23:47:37 [work] base: finished (returncode=0)
+SBY 23:47:37 [work] prep: starting process "cd work/model; yosys -ql design_prep.log design_prep.ys"
+SBY 23:47:37 [work] prep: finished (returncode=0)
+SBY 23:47:37 [work] smt2: starting process "cd work/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 23:47:37 [work] smt2: finished (returncode=0)
+SBY 23:47:37 [work] engine_0: starting process "cd work; yosys-smtbmc -s z3 --presat -c --noprogress -t 2  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Solver: z3
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Reached cover statement in step 1 at mul_formal: c_signed_negative
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Reached cover statement in step 1 at mul_formal: c_unsigned_high
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Reached cover statement in step 1 at mul_formal: c_zero
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY 23:47:37 [work] engine_0: ##   0:00:00  Status: passed
+SBY 23:47:37 [work] engine_0: finished (returncode=0)
+SBY 23:47:37 [work] engine_0: Status returned by engine: pass
+SBY 23:47:37 [work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 23:47:37 [work] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 23:47:37 [work] summary: engine_0 (smtbmc z3) returned pass
+SBY 23:47:37 [work] summary: cover trace: work/engine_0/trace0.vcd
+SBY 23:47:37 [work] summary:   reached cover statement mul_formal.c_signed_negative at formal/harness.sv:35.5-35.83 step 1
+SBY 23:47:37 [work] summary: cover trace: work/engine_0/trace1.vcd
+SBY 23:47:37 [work] summary:   reached cover statement mul_formal.c_unsigned_high at formal/harness.sv:34.5-34.82 step 1
+SBY 23:47:37 [work] summary: cover trace: work/engine_0/trace2.vcd
+SBY 23:47:37 [work] summary:   reached cover statement mul_formal.c_zero at formal/harness.sv:36.5-36.26 step 1
+SBY 23:47:37 [work] DONE (PASS, rc=0)

@@ -1,6 +1,6 @@
 # 工作区约定
 
-- 当前 exp15 工作已由用户要求停止并交接。先读 HANDOFF.md；收到明确接续任务后再启动新的验证或升级。
+- 历史 exp15 工作曾按用户要求停止，记录保留在 HANDOFF.md。用户随后明确授权接续，建立 div/mul/axi 多模块支持及 GitHub 版本管理；当前状态见 README.md 和 reports/。不要覆盖历史结果或把其结论转移到新源码。
 
 - 先阅读 README.md 和目标 cases/<name>/README.md，运行前用 `python run.py doctor` 检查固定工具链。
 - 实验 RTL 是外部输入，运行时复制快照；只有用户明确要求修改实验设计时才编辑外部源码。

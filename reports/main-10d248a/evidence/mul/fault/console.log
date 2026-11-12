@@ -1,0 +1,30 @@
+SBY 23:46:38 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234639-fault-54b83a/src/rtl/mul.v' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234639-fault-54b83a/work/src/rtl/mul.v'.
+SBY 23:46:38 [work] Copy '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234639-fault-54b83a/src/formal/harness.sv' to '/mnt/d/PersonalPrograms/calab/formal-lite/results/mul/20261112-234639-fault-54b83a/work/src/formal/harness.sv'.
+SBY 23:46:38 [work] engine_0: smtbmc z3
+SBY 23:46:38 [work] base: starting process "cd work/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 23:46:38 [work] base: finished (returncode=0)
+SBY 23:46:38 [work] prep: starting process "cd work/model; yosys -ql design_prep.log design_prep.ys"
+SBY 23:46:38 [work] prep: finished (returncode=0)
+SBY 23:46:38 [work] smt2: starting process "cd work/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 23:46:39 [work] smt2: finished (returncode=0)
+SBY 23:46:39 [work] engine_0: starting process "cd work; yosys-smtbmc -s z3 --presat --noprogress -t 2  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Solver: z3
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 23:46:39 [work] engine_0: ##   0:00:00  BMC failed!
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Assert failed in mul_formal: a_product
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace.vcd
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace_tb.v
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace.smtc
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace.yw
+SBY 23:46:39 [work] engine_0: ##   0:00:00  Status: failed
+SBY 23:46:39 [work] engine_0: finished (returncode=1)
+SBY 23:46:39 [work] engine_0: Status returned by engine: FAIL
+SBY 23:46:39 [work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)
+SBY 23:46:39 [work] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 23:46:39 [work] summary: engine_0 (smtbmc z3) returned FAIL
+SBY 23:46:39 [work] summary: counterexample trace: work/engine_0/trace.vcd
+SBY 23:46:39 [work] summary:   failed assertion mul_formal.a_product at formal/harness.sv:32.5-32.59 step 1
+SBY 23:46:39 [work] DONE (FAIL, rc=2)

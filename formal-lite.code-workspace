@@ -1,0 +1,20 @@
+{
+  "folders": [{"path": "."}],
+  "settings": {
+    "files.watcherExclude": {"**/results/**": true, "**/.cache/**": true},
+    "search.exclude": {"**/results/**": true, "**/.cache/**": true},
+    "files.exclude": {"**/__pycache__": true},
+    "files.associations": {"*.sby": "ini", "*.sv": "systemverilog"},
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {"label": "Formal: doctor", "type": "process", "command": "python", "args": ["${workspaceFolder}/run.py", "doctor"], "problemMatcher": []},
+      {"label": "Formal: self-test", "type": "process", "command": "python", "args": ["${workspaceFolder}/run.py", "self-test"], "problemMatcher": []},
+      {"label": "Formal: smoke prove", "type": "process", "command": "python", "args": ["${workspaceFolder}/run.py", "run", "smoke", "--task", "prove"], "problemMatcher": []},
+      {"label": "Formal: smoke cover", "type": "process", "command": "python", "args": ["${workspaceFolder}/run.py", "run", "smoke", "--task", "cover"], "problemMatcher": []}
+    ]
+  }
+}

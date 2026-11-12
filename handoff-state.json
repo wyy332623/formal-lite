@@ -1,0 +1,59 @@
+{
+  "status": "stopped_by_user",
+  "saved_at": "2026-11-12T23:20:14+08:00",
+  "workspace": "D:/PersonalPrograms/calab/formal-lite",
+  "handoff": "HANDOFF.md",
+  "source_commit": "10d248abc6af8811e506909dd61cc3ddc498ccaf",
+  "active_verification_processes": "none at last process check",
+  "results": [
+    {
+      "directory": "D:\\PersonalPrograms\\calab\\formal-lite\\results\\exp15\\20261112-231326-bmc-355aa9",
+      "task": "bmc",
+      "status": "FAIL",
+      "engine": null,
+      "elapsed_seconds": 36.751,
+      "waveforms": [
+        "work/engine_0/trace.vcd"
+      ]
+    },
+    {
+      "directory": "D:\\PersonalPrograms\\calab\\formal-lite\\results\\exp15\\20261112-231436-single_bmc-aef847",
+      "task": "single_bmc",
+      "status": "TIMEOUT",
+      "engine": null,
+      "elapsed_seconds": 122.071,
+      "waveforms": []
+    },
+    {
+      "directory": "D:\\PersonalPrograms\\calab\\formal-lite\\results\\exp15\\20261112-231436-stability-5d11eb",
+      "task": "stability",
+      "status": "UNKNOWN",
+      "engine": null,
+      "elapsed_seconds": 2.335,
+      "waveforms": [
+        "work/engine_0/trace_induct.vcd"
+      ]
+    },
+    {
+      "directory": "D:\\PersonalPrograms\\calab\\formal-lite\\results\\exp15\\20261112-231623-stability-6156f2",
+      "task": "stability",
+      "status": "PROVED",
+      "engine": "abc pdr",
+      "elapsed_seconds": 1.908,
+      "waveforms": []
+    }
+  ],
+  "file_sha256": {
+    "run.py": "c0591ea578ce9f885e1f8a232582cdb368431ab366d6c3959a52b5886adadaf0",
+    "worker.py": "fcb9c9d6f061112807a880a99345b6505fdaf3c6aab141ff066e66441d595dc9",
+    "workspace.json": "e3ee5945bcec93f37dc754670ce809f84ec4b4b8574187af107a06af71869938",
+    "toolchain.lock.json": "c732cbd284ede75b3b35370000a1892cd600daaf1211dc9b8397518d1204dcb4",
+    "cases/exp15/case.json": "ad6f632404ae61b9cd8ba548f42c586684cc4b900cb6e7c992fb6ee651b26190",
+    "cases/exp15/harness.sv": "f2a7e04d07d1f4a12b44bd8e6f2326b576f232bca324d7fb464311e644731db9",
+    "cases/exp15/environment.sv": "d2c412fd976e71a6fc1053371f1834fc6c6b73b4bc211aa8eab5a6460b2d48d2",
+    "cases/exp15/properties.sv": "bd24bcb7bdecabd675a10fb0f0dd279c53aecc85189b63458134b2a355427e96",
+    "cases/exp15/assumptions.md": "ca4364ad228a2650e4b4f76168ce3b32d5f9472b40d03074ce25a1d86fac8dd6",
+    "cases/exp15/trace_table.py": "e15bdc383ca614f82cccc0a372c965c1d2ea20d5a2ce6eeb57fac12c3aeb49ff",
+    "sources/calab-main-10d248a/myCPU/axi_bridge.v": "3b3be22004a443ccc4afcc6345e08751707fdf6a368d80f6bbf0ea64deb45f51"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "smoke",
+  "enabled": true,
+  "top": "smoke_formal",
+  "files": ["smoke.sv"],
+  "assumptions_file": "assumptions.md",
+  "tasks": {
+    "bmc": {"mode": "bmc", "depth": 20},
+    "prove": {"mode": "prove", "depth": 20},
+    "cover": {"mode": "cover", "depth": 20},
+    "fault": {"mode": "bmc", "depth": 20, "defines": ["INJECT_BUG"], "expected_raw_status": "FAIL"}
+  }
+}

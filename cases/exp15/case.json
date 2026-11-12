@@ -1,0 +1,22 @@
+{
+  "name": "exp15",
+  "enabled": true,
+  "top": "bridge_formal",
+  "files": [
+    {"path": "../../sources/calab-main-10d248a/myCPU/axi_bridge.v", "dest": "rtl/axi_bridge.v"},
+    {"path": "environment.sv", "dest": "formal/environment.sv", "read": false},
+    {"path": "properties.sv", "dest": "formal/properties.sv", "read": false},
+    {"path": "harness.sv", "dest": "formal/harness.sv"}
+  ],
+  "include_dirs": ["rtl", "formal"],
+  "assumptions_file": "assumptions.md",
+  "tasks": {
+    "bmc": {"mode": "bmc", "depth": 24, "timeout_seconds": 120},
+    "prove": {"mode": "prove", "depth": 16, "timeout_seconds": 180},
+    "single_bmc": {"mode": "bmc", "depth": 32, "timeout_seconds": 120, "defines": ["REQUEST_LIMIT=1"]},
+    "single_prove": {"mode": "prove", "depth": 16, "timeout_seconds": 180, "defines": ["REQUEST_LIMIT=1"]},
+    "stability": {"mode": "prove", "depth": 16, "timeout_seconds": 120, "defines": ["STABILITY_ONLY"], "engine": "abc pdr"},
+    "single_pdr": {"mode": "prove", "depth": 16, "timeout_seconds": 180, "defines": ["REQUEST_LIMIT=1"], "engine": "abc pdr"},
+    "cover": {"mode": "cover", "depth": 32, "timeout_seconds": 120, "defines": ["STABILITY_ONLY", "COVER_PIPELINED"]}
+  }
+}

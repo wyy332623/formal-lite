@@ -1,6 +1,6 @@
 # mul 形式化用例
 
-验证当前 CPU 实际实例化的组合 `mul`，不包含备用厂商 IP。接口、输入域及独立算术参考见 assumptions.md；版本见 source.json。
+验证当前 CPU 实际实例化的组合 `mul`，不包含备用厂商 IP。接口、输入域及独立算术参考见 assumptions.md。
 
 ```powershell
 python run.py doctor

@@ -1,10 +1,7 @@
 {
-  "format_version": 1,
-  "runtime": "wsl",
   "wsl_distribution": "Ubuntu-22.04",
   "toolchain_root": "~/.local/share/formal-lite/toolchains/2026-11-12/oss-cad-suite",
   "solver": "z3",
   "default_timeout_seconds": 60,
-  "default_depth": 64,
-  "experiment_rtl_root": "../calab/exp9/myCPU"
+  "default_depth": 64
 }

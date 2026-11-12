@@ -1,8 +1,0 @@
-{
-  "remote": "https://github.com/wyy332623/calab",
-  "branch": "main",
-  "commit": "10d248abc6af8811e506909dd61cc3ddc498ccaf",
-  "module": "axi_bridge",
-  "source": "myCPU/axi_bridge.v",
-  "sha256": "3b3be22004a443ccc4afcc6345e08751707fdf6a368d80f6bbf0ea64deb45f51"
-}

@@ -1,6 +1,6 @@
 # AXI bridge 形式化用例
 
-验证最新 main 固定快照中的 `axi_bridge`。这是从历史 exp15 接续的独立用例；原 cases/exp15 及其结果不覆盖、不改写。
+验证固定快照中的 `axi_bridge`。
 
 - 类 SRAM 受理前允许改变或撤回请求；IF 为对齐 word read，MEM 为合法 byte/halfword/word 读写。
 - AXI 单拍、OKAY 响应，同 ID 按序；AR/AW/W 任意独立反压，R/B 可同拍。账本检查受理请求、AXI 载荷、返回数据及类 SRAM 完成顺序，不引用 DUT 内部状态。

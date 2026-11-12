@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Personal formal runner; Python standard library only on the host."""
+"""Formal verification platform CLI."""
 import argparse
 from datetime import datetime
-import hashlib
 import json
 import os
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import re
 import shutil
 import subprocess
 import sys
 import urllib.request
 import uuid
+
+import worker
 
 ROOT = Path(__file__).resolve().parent
 
@@ -26,149 +27,158 @@ def linux_path(path):
         return text
     match = re.fullmatch(r"([A-Za-z]):[\\/](.*)", text)
     if not match:
-        raise ValueError("Use a local Windows drive, not a UNC path: " + text)
+        raise ValueError("Use a local Windows drive path, not UNC: " + text)
     return "/mnt/" + match[1].lower() + "/" + match[2].replace("\\", "/")
 
 
-def worker(config, action, *paths):
-    args = ["/usr/bin/python3", linux_path(ROOT / "worker.py"), action,
-            linux_path(ROOT / "workspace.json"), *[linux_path(p) for p in paths]]
-    if os.name == "nt":
-        args = ["wsl.exe", "--distribution", config["wsl_distribution"], "--exec", *args]
-    process = subprocess.run(args, cwd=ROOT, capture_output=True)
-    def decode(data):
-        # wsl.exe emits some Windows-side startup diagnostics in UTF-16LE.
-        encoding = "utf-16-le" if data.count(b"\x00") > len(data) // 8 else "utf-8"
-        return data.decode(encoding, errors="replace").lstrip("\ufeff")
-    if process.stdout:
-        print(decode(process.stdout).rstrip(), flush=True)
-    if process.stderr:
-        diagnostic = decode(process.stderr)
-        cache = ROOT / ".cache"
-        cache.mkdir(exist_ok=True)
-        with (cache / "runtime-diagnostics.log").open("a", encoding="utf-8") as log:
-            log.write(datetime.now().isoformat() + " " + action + "\n" + diagnostic + "\n")
-        if process.returncode:
-            print(diagnostic.rstrip(), file=sys.stderr)
-    return process.returncode
+def decode_output(data):
+    encoding = "utf-16-le" if data.count(b"\x00") > len(data) // 8 else "utf-8"
+    return data.decode(encoding, errors="replace").lstrip("\ufeff")
+
+
+def invoke_worker(config, action, *args):
+    if os.name != "nt":
+        if action == "doctor":
+            return worker.doctor(config)
+        if action == "bootstrap":
+            return worker.bootstrap(config, args[0], args[1])
+        return worker.execute(config, args[0], args[1], int(args[2]), args[3])
+
+    cmd = [
+        "wsl.exe", "--distribution", config["wsl_distribution"], "--exec",
+        "/usr/bin/python3", linux_path(ROOT / "worker.py"), action,
+        linux_path(ROOT / "workspace.json"),
+        *[linux_path(a) if isinstance(a, Path) else str(a) for a in args],
+    ]
+    proc = subprocess.run(cmd, cwd=ROOT, capture_output=True)
+    stdout = decode_output(proc.stdout).strip()
+    stderr = decode_output(proc.stderr).strip()
+    if stderr and proc.returncode:
+        print(stderr, file=sys.stderr)
+    if not stdout:
+        raise RuntimeError(stderr or f"worker {action} exited with code {proc.returncode}")
+    # bootstrap may print progress lines before the final JSON payload.
+    json_start = stdout.find("{")
+    if json_start == -1:
+        raise RuntimeError(stdout)
+    if json_start > 0:
+        print(stdout[:json_start].rstrip(), flush=True)
+    return proc.returncode, json.loads(stdout[json_start:])
 
 
 def load_case(name):
-    if not re.fullmatch(r"[A-Za-z0-9_-]+", name):
-        raise ValueError("Invalid case name")
     case_dir = ROOT / "cases" / name
-    case = read_json(case_dir / "case.json")
-    if not case.get("enabled", True):
-        raise ValueError("NEEDS_CONFIGURATION: " + case.get("configuration_needed", name))
-    return case_dir, case
+    case_file = case_dir / "case.json"
+    if not case_file.is_file():
+        raise FileNotFoundError(f"Case not found: {name}")
+    return case_dir, read_json(case_file)
 
 
-def run_case(config, name, task, depth=None, timeout=None):
+def run_case(config, name, task="prove", depth=None, timeout=None, engine=None):
     case_dir, case = load_case(name)
-    if task not in case["tasks"]:
-        raise ValueError("Unknown task: " + task)
-    selection = case["tasks"][task]
-    if selection.get("expected_raw_status", "PASS") not in ("PASS", "FAIL"):
-        raise ValueError("Only PASS or an explicit expected FAIL may count as an accepted result")
+    tasks = case["tasks"]
+    if task not in tasks:
+        available = ", ".join(tasks)
+        raise KeyError(f"Unknown task '{task}' for case '{name}' (available: {available})")
+
+    selection = tasks[task]
     mode = selection["mode"]
-    if mode not in ("bmc", "prove", "cover"):
-        raise ValueError("Unsupported task mode")
     depth = selection.get("depth", config["default_depth"]) if depth is None else depth
     timeout = selection.get("timeout_seconds", config["default_timeout_seconds"]) if timeout is None else timeout
-    if depth <= 0 or timeout <= 0:
-        raise ValueError("Depth and timeout must be positive")
-    stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    run_dir = ROOT / "results" / name / (stamp + "-" + task + "-" + uuid.uuid4().hex[:6])
+    engine = engine or selection.get("engine") or f"smtbmc {config['solver']}"
+    expected = selection.get("expected_raw_status", "PASS")
+    defines = case.get("defines", []) + selection.get("defines", [])
+    includes = case.get("include_dirs", [])
+
     files = []
-    destinations = set()
-    # Validate all inputs before creating a partial result directory.
     for entry in case["files"]:
         entry = {"path": entry} if isinstance(entry, str) else entry
         source = (case_dir / entry["path"]).resolve()
+        if not source.is_file():
+            raise FileNotFoundError(f"Missing source file: {source}")
         dest = entry.get("dest", source.name)
-        if not re.fullmatch(r"[A-Za-z0-9_./-]+", dest) or ".." in PurePosixPath(dest).parts or dest.startswith("/"):
-            raise ValueError("Unsafe or unsupported staging path: " + dest)
-        if dest in destinations or not source.is_file():
-            raise ValueError("Duplicate destination or missing source: " + str(source))
-        destinations.add(dest)
-        files.append((source, dest, entry.get("read", source.suffix in (".v", ".sv"))))
-    top = case["top"]
-    defines = case.get("defines", []) + selection.get("defines", [])
-    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_$]*", top):
-        raise ValueError("Invalid top name")
-    if any(not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*(=[A-Za-z0-9_]+)?", d) for d in defines):
-        raise ValueError("Invalid define")
-    includes = case.get("include_dirs", [])
-    if any(not re.fullmatch(r"[A-Za-z0-9_./-]+", d) or ".." in PurePosixPath(d).parts or d.startswith("/") for d in includes):
-        raise ValueError("Include directories must refer to staged relative directories")
+        read = entry.get("read", source.suffix in (".v", ".sv"))
+        files.append((source, dest, read))
+
+    sources = [dest for _, dest, should_read in files if should_read]
+    if not sources:
+        raise ValueError(f"Case '{name}' has no readable RTL source")
+
+    stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    run_dir = ROOT / "results" / name / f"{stamp}-{task}-{uuid.uuid4().hex[:6]}"
     run_dir.mkdir(parents=True)
-    manifest = []
-    for source, dest, read in files:
+
+    for source, dest, _ in files:
         target = run_dir / "src" / dest
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
-        manifest.append({"path": str(source), "staged_as": dest,
-                         "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
-    flags = " ".join(["-D" + d for d in defines] + ["-I" + d for d in includes])
-    sources = " ".join(dest for _, dest, should_read in files if should_read)
-    if not sources:
-        raise ValueError("Case has no readable RTL source")
-    solver = config["solver"]
-    if solver not in ("z3", "boolector", "yices", "bitwuzla"):
-        raise ValueError("Unsupported solver configuration")
-    engine = selection.get("engine", "smtbmc " + solver)
-    if engine not in ("abc pdr", "smtbmc z3", "smtbmc boolector", "smtbmc yices", "smtbmc bitwuzla"):
-        raise ValueError("Unsupported proof engine")
-    text = (f"[options]\nmode {mode}\ndepth {depth}\ntimeout {timeout}\n" +
-            ("cover_assert on\n" if mode == "cover" else "") +
-            f"\n[engines]\n{engine}\n\n[script]\n" +
-            f"read_verilog -formal -sv {flags} {sources}\nprep -top {top}\n\n[files]\n" +
-            "\n".join(f"{dest} src/{dest}" for _, dest, _ in files) + "\n")
-    (run_dir / "case.sby").write_text(text, encoding="utf-8")
-    assumptions = case.get("assumptions_file")
-    if assumptions:
-        shutil.copy2(case_dir / assumptions, run_dir / "assumptions.md")
-    metadata_file = case_dir / "source.json"
-    source_metadata = read_json(metadata_file) if metadata_file.exists() else None
-    if source_metadata:
-        matches = [m for m in manifest if Path(m["path"]).name == Path(source_metadata["source"]).name]
-        if len(matches) != 1 or matches[0]["sha256"] != source_metadata["sha256"]:
-            raise ValueError("DUT differs from pinned source.json; create a new input snapshot")
-    request = {"case": name, "task": task, "mode": mode, "depth": depth,
-               "source_metadata": source_metadata,
-               "defines": defines,
-               "case_config_sha256": hashlib.sha256((case_dir / "case.json").read_bytes()).hexdigest(),
-               "engine": engine,
-               "timeout_seconds": timeout, "expected_raw_status": selection.get("expected_raw_status", "PASS"),
-               "assumptions_file": "assumptions.md" if assumptions else None, "source_manifest": manifest}
-    (run_dir / "request.json").write_text(json.dumps(request, indent=2), encoding="utf-8")
-    print("Run directory: " + str(run_dir), flush=True)
-    code = worker(config, "run", run_dir)
-    result_file = run_dir / "result.json"
-    if result_file.exists():
-        result = read_json(result_file)
-        (run_dir / "summary.md").write_text(
-            f"# {name} / {task}\n\nStatus: **{result['status']}**\n\n" +
-            f"Mode: {mode}; depth: {depth}; elapsed: {result['elapsed_seconds']} s.\n\n" +
-            "BMC_PASS only covers the configured depth. PROVED applies to the configured properties and assumptions.\n\n" +
-            "See result.json, request.json, assumptions.md (when present), console.log and work/ for details.\n",
-            encoding="utf-8")
-    return code, run_dir
+
+    flags = ["-D" + d for d in defines] + ["-I" + d for d in includes]
+    read_cmd = " ".join(["read_verilog -formal -sv", *flags, *sources])
+    cover_opt = "cover_assert on\n" if mode == "cover" else ""
+    sby_text = (
+        f"[options]\nmode {mode}\ndepth {depth}\ntimeout {timeout}\n{cover_opt}\n"
+        f"[engines]\n{engine}\n\n"
+        f"[script]\n{read_cmd}\nprep -top {case['top']}\n\n"
+        f"[files]\n" + "\n".join(f"{dest} src/{dest}" for _, dest, _ in files) + "\n"
+    )
+    (run_dir / "case.sby").write_text(sby_text, encoding="utf-8")
+
+    print(f"Running {name}/{task} -> {run_dir}", flush=True)
+    code, payload = invoke_worker(config, "run", run_dir, mode, timeout, expected)
+    result = {
+        "case": name,
+        "task": task,
+        "mode": mode,
+        "engine": engine,
+        "depth": depth,
+        "timeout_seconds": timeout,
+        **payload,
+    }
+    (run_dir / "result.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({
+        "status": result["status"],
+        "accepted": result["accepted"],
+        "elapsed_seconds": result["elapsed_seconds"],
+        "waveforms": result["waveforms"],
+    }))
+    return code, run_dir, result
 
 
-def bootstrap(config):
+def cmd_bootstrap(config):
     lock_file = ROOT / "toolchain.lock.json"
     lock = read_json(lock_file)
     archive = ROOT / ".cache" / lock["name"]
     archive.parent.mkdir(exist_ok=True)
     if not archive.exists() or archive.stat().st_size != lock["size"]:
         partial = archive.with_suffix(archive.suffix + ".partial")
-        print("Downloading pinned toolchain: " + lock["browser_download_url"], flush=True)
-        request = urllib.request.Request(lock["browser_download_url"], headers={"User-Agent": "formal-lite"})
-        with urllib.request.urlopen(request, timeout=60) as response, partial.open("wb") as target:
-            shutil.copyfileobj(response, target, length=1024 * 1024)
+        print("Downloading toolchain: " + lock["browser_download_url"], flush=True)
+        req = urllib.request.Request(lock["browser_download_url"], headers={"User-Agent": "formal-lite"})
+        with urllib.request.urlopen(req, timeout=60) as resp, partial.open("wb") as out:
+            shutil.copyfileobj(resp, out, length=1024 * 1024)
         partial.replace(archive)
-    return worker(config, "bootstrap", archive, lock_file)
+    code, result = invoke_worker(config, "bootstrap", archive, lock_file)
+    print(json.dumps(result, indent=2))
+    return code
+
+
+def cmd_list():
+    for path in sorted((ROOT / "cases").glob("*/case.json")):
+        case = read_json(path)
+        print(f"{path.parent.name}: {', '.join(case.get('tasks', {}))}")
+    return 0
+
+
+def cmd_self_test(config):
+    passed = True
+    for task in ("bmc", "prove", "cover", "fault"):
+        code, _, result = run_case(config, "smoke", task)
+        ok = code == 0 and result.get("accepted", False)
+        if task == "fault":
+            ok = ok and result.get("raw_status") == "FAIL" and bool(result.get("waveforms"))
+        passed = passed and ok
+    print("SELF-TEST " + ("PASS" if passed else "FAIL"))
+    return 0 if passed else 1
 
 
 def main():
@@ -176,44 +186,30 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     for action in ("doctor", "bootstrap", "list", "self-test"):
         commands.add_parser(action)
-    run = commands.add_parser("run")
-    run.add_argument("case")
-    run.add_argument("--task", default="prove")
-    run.add_argument("--depth", type=int)
-    run.add_argument("--timeout", type=int)
+    run_cmd = commands.add_parser("run")
+    run_cmd.add_argument("case")
+    run_cmd.add_argument("--task", default="prove")
+    run_cmd.add_argument("--depth", type=int)
+    run_cmd.add_argument("--timeout", type=int)
+    run_cmd.add_argument("--engine")
     args = parser.parse_args()
+
     config = read_json(ROOT / "workspace.json")
     if args.command == "doctor":
-        return worker(config, "doctor")
+        code, result = invoke_worker(config, "doctor")
+        print(json.dumps(result, indent=2))
+        return code
     if args.command == "bootstrap":
-        return bootstrap(config)
+        return cmd_bootstrap(config)
     if args.command == "list":
-        for path in sorted((ROOT / "cases").glob("*/case.json")):
-            case = read_json(path)
-            print(path.parent.name + ": " + ("READY" if case.get("enabled", True) else "TEMPLATE / NEEDS_CONFIGURATION"))
-        return 0
+        return cmd_list()
     if args.command == "run":
-        return run_case(config, args.case, args.task, args.depth, args.timeout)[0]
-    outcomes = []
-    for task in ("bmc", "prove", "cover", "fault"):
-        code, directory = run_case(config, "smoke", task)
-        result = read_json(directory / "result.json") if (directory / "result.json").exists() else {}
-        ok = code == 0 and result.get("expected_result_observed", False)
-        if task == "fault":
-            ok = ok and bool(result.get("waveforms")) and result.get("raw_status") == "FAIL"
-        outcomes.append({"task": task, "ok": ok, "result_dir": str(directory), "status": result.get("status", "ERROR")})
-    (ROOT / "results/self-test-latest.json").write_text(json.dumps(outcomes, indent=2), encoding="utf-8")
-    passed = all(item["ok"] for item in outcomes)
-    print("SELF-TEST " + ("PASS" if passed else "FAIL"))
-    return 0 if passed else 1
+        return run_case(config, args.case, args.task, args.depth, args.timeout, args.engine)[0]
+    return cmd_self_test(config)
 
 
 if __name__ == "__main__":
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
-    try:
-        raise SystemExit(main())
-    except (OSError, ValueError, KeyError, subprocess.SubprocessError) as exc:
-        print("ERROR: " + str(exc), file=sys.stderr)
-        raise SystemExit(2)
+    raise SystemExit(main())

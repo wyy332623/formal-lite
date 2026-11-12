@@ -1,8 +1,0 @@
-{
-  "remote": "https://github.com/wyy332623/calab.git",
-  "branch": "main",
-  "commit": "10d248abc6af8811e506909dd61cc3ddc498ccaf",
-  "module": "div",
-  "source": "myCPU/div.v",
-  "sha256": "1adea77d84f7b3bcd8118be25f12a6cc710f0c1f915b146119c47340790b8a46"
-}
